@@ -1,10 +1,14 @@
 package tcg;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
+import Cards.Card;
+import Cards.Infantry;
+import Cards.Tank;
+import Cards.Medic;
 
 public class Player {
     public int hp = 20;
+    public int energy = 5;
     public ArrayList<Card> deck = new ArrayList<>();
     public ArrayList<Card> hand = new ArrayList<>();
 
@@ -16,11 +20,14 @@ public class Player {
 
     public void resetDeck() {
         deck.clear();
-        deck.add(new Card("Fireball", "attack", 5));
-        deck.add(new Card("Heal", "heal", 3));
-        deck.add(new Card("Shield", "heal", 2));
-        deck.add(new Card("Strike", "attack", 4));
-        deck.add(new Card("Blast", "attack", 6));
+        deck.add(new Infantry());
+        deck.add(new Infantry());
+        deck.add(new Tank());
+        deck.add(new Medic());
         Collections.shuffle(deck);
+    }
+
+    public void resetEnergy() {
+        energy = 5;
     }
 }
