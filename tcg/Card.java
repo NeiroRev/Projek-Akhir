@@ -1,20 +1,15 @@
 package tcg;
 
 public abstract class Card {
-    public String nama;
-    public String tipe;
-    public int hargaUnit;
+    public String name;
+    public int cost;
+    public String type;
 
-    public Card(String nama, int hargaUnit, String tipe) {
-        this.nama = nama;
-        this.hargaUnit = hargaUnit;
-        this.tipe = tipe;
-
-    public abstract void play(Player sendiri, Player musuh);
-
-    @Override
-    public String toString() {
-        return nama + " (" + tipe + ")";
+    public Card(String name, int cost, String type) {
+        this.name = name;
+        this.cost = cost;
+        this.type = type;
     }
-}
+
+    public abstract void play(Player self, Player opponent);
 }
