@@ -5,7 +5,7 @@ import tcg.Cards.*;
 
 public class Player {
     private String name;
-    private int hp;
+    public int hp;
     private int energy;
     private ArrayList<Card> deck;
     private ArrayList<Card> hand;
@@ -43,14 +43,21 @@ public class Player {
     }
 
     public void resetDeck() {
-        deck.clear();
-        deck.add(new Infantry());
-        deck.add(new Infantry());
-        deck.add(new LightTank());
-        deck.add(new MediumTank());
-        deck.add(new Medic());
-        deck.add(new Paratrooper());
-        Collections.shuffle(deck);
+    deck.clear();
+    hand.clear();
+
+    // Tambahkan beragam kartu lebih banyak ke dalam deck
+    for (int i = 0; i < 4; i++) {
+        deck.add(new Infantry());      // 4 Infantry
+        deck.add(new LightTank());     // 4 LightTank
+        deck.add(new Paratrooper());   // 4 Paratrooper
+        deck.add(new Medic());         // 4 Medic
+        deck.add(new MediumTank());    // 4 MediumTank (kalau kamu sudah punya ini)
+        deck.add(new Sniper());        // 4 Sniper (kalau kamu punya)
+    }
+
+    // Total: 24 kartu
+    Collections.shuffle(deck);
     }
 
     public void drawCards(int count) {

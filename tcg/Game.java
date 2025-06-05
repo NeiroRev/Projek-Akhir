@@ -28,8 +28,12 @@ public class Game {
             System.out.println("\n--- New Turn ---");
             printStatus();
             playerTurn();
+
             if (enemy.getHp() <= 0) break;
+
             enemyTurn();
+
+            if (player.getHp() <= 0) break;
         }
 
         System.out.println("\nGame Over!");
@@ -48,36 +52,52 @@ public class Game {
     }
 
     private void playerTurn() {
-        System.out.print("Choose a card to play [1-" + player.getHand().size() + "] or 0 to skip: ");
-        try {
-            int choice = Integer.parseInt(scanner.nextLine()) - 1;
-            if (choice == -1) {
-                System.out.println("Turn skipped.");
+        player.drawCards(1); // 🔥 Tambahkan ini
+        List<Card> hand = player.getHand();
+        while (true) {
+            System.out.print("Choose a card to play [1-" + hand.size() + "] or 0 to skip: ");
+            String input = scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("You skipped your turn.");
                 return;
             }
-            if (choice >= 0 && choice < player.getHand().size()) {
-                Card card = player.getHand().get(choice);
-                if (card.cost <= player.getEnergy()) {
-                    player.playCard(choice, enemy);
-                } else {
-                    System.out.println("Not enough energy!");
-                }
-            } else {
-                System.out.println("Invalid choice.");
+
+            if (choice < 1 || choice > hand.size()) {
+                System.out.println("Invalid choice. Try again.");
+                continue;
             }
-        } catch (Exception e) {
-            System.out.println("Invalid input.");
+
+            Card selected = hand.get(choice - 1);
+            if (selected.cost > player.getEnergy()) {
+                System.out.println("Not enough energy to play this card.");
+                continue;
+            }
+
+            player.playCard(choice - 1, enemy);
+            return;
         }
     }
 
     private void enemyTurn() {
-        for (int i = 0; i < enemy.getHand().size(); i++) {
+    enemy.drawCards(1); // 🔥 Tambahkan ini
+    for (int i = 0; i < enemy.getHand().size(); i++) { 
             Card card = enemy.getHand().get(i);
             if (card.cost <= enemy.getEnergy()) {
                 System.out.println("Enemy plays: " + card.name);
                 enemy.playCard(i, player);
-                break;
+                return;
             }
         }
+
+        System.out.println("Enemy skipped their turn.");
     }
 }

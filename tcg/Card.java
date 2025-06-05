@@ -12,4 +12,9 @@ public abstract class Card {
     }
 
     public abstract void play(Player self, Player opponent);
+
+    @Override
+    public String toString() {
+        return name + " (Biaya: " + cost + ", Type: " + type + ")";
+    }
 }
