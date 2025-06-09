@@ -69,7 +69,7 @@ public class Player {
     public void playCard(int index, Player opponent) {
         if (index < 0 || index >= hand.size()) return;
         Card card = hand.remove(index);
-        energy -= card.cost;
+        this.energy -= card.cost; // PENTING: energy dikurangi cost kartu
         card.play(this, opponent);
     }
 
@@ -81,5 +81,9 @@ public class Player {
     public void heal(int amount) {
         hp += amount;
         if (hp > 20) hp = 20;
+    }
+
+    public void addEnergy(int amount) {
+        this.energy += amount;
     }
 }

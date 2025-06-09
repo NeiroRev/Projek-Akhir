@@ -1,15 +1,17 @@
 package tcg.Cards;
+
 import tcg.Card;
 import tcg.Player;
 
 public class LightTank extends Card {
+    private int damage = 3; // contoh damage
+
     public LightTank() {
         super("Light Tank", 2, "Vehicle");
     }
 
     @Override
     public void play(Player self, Player opponent) {
-        opponent.hp -= 3;
-        System.out.println(self.getName() + " menyerang dengan Light Tank! (-3 HP lawan)");
+        opponent.hp -= damage;
     }
 }

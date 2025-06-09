@@ -4,7 +4,7 @@ import tcg.Card;
 import tcg.Player;
 
 public class Medic extends Card {
-    private int heal = 4;
+    private int heal = 3;
 
     public Medic() {
         super("Medic", 2, "Support");
@@ -12,6 +12,6 @@ public class Medic extends Card {
 
     @Override
     public void play(Player self, Player opponent) {
-        self.hp += heal;
+        self.heal(heal);
     }
 }
