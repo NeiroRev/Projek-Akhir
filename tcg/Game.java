@@ -55,30 +55,31 @@ public class Game {
         player.drawCards(1); // 🔥 Tambahkan ini
         List<Card> hand = player.getHand();
         while (true) {
-            System.out.print("Choose a card to play [1-" + hand.size() + "] or 0 to skip: ");
+            System.out.print("Pilih satu kartu [1-" + hand.size() + "] atau pilih 0 untuk skip: ");
             String input = scanner.nextLine();
+            System.out.println("=======================================");
             int choice;
 
             try {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Invalid salah bro. Pilih angkanya itu!");
                 continue;
             }
 
             if (choice == 0) {
-                System.out.println("You skipped your turn.");
+                System.out.println("Kamu melewati giliranmu.");
                 return;
             }
 
             if (choice < 1 || choice > hand.size()) {
-                System.out.println("Invalid choice. Try again.");
+                System.out.println("Invalid bro. Coba lagi!");
                 continue;
             }
 
             Card selected = hand.get(choice - 1);
             if (selected.cost > player.getEnergy()) {
-                System.out.println("Not enough energy to play this card.");
+                System.out.println("Wah energimu kurang bruh.");
                 continue;
             }
 
@@ -92,12 +93,12 @@ public class Game {
     for (int i = 0; i < enemy.getHand().size(); i++) { 
             Card card = enemy.getHand().get(i);
             if (card.cost <= enemy.getEnergy()) {
-                System.out.println("Enemy plays: " + card.name);
+                System.out.println("Enemy memainkan kartu: " + card.name);
                 enemy.playCard(i, player);
                 return;
             }
         }
 
-        System.out.println("Enemy skipped their turn.");
+        System.out.println("Musuh melewati gilirannya.");
     }
 }
