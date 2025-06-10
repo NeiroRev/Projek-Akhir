@@ -1,9 +1,7 @@
 package tcg.GUI;
 
-import tcg.Game;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class MainMenu extends JFrame {
     public MainMenu() {
@@ -24,6 +22,8 @@ public class MainMenu extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(oliveDrab);
+        // Ubah layout menjadi BoxLayout agar tombol berada di tengah secara vertikal
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         JButton startButton = new JButton("Mulai Permainan");
         JButton cardListButton = new JButton("Lihat Daftar Kartu");
@@ -36,9 +36,19 @@ public class MainMenu extends JFrame {
         exitButton.setBackground(oliveDrab.darker());
         exitButton.setForeground(Color.WHITE);
 
+        // Tambahkan tombol dengan jarak dan rata tengah
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cardListButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttonPanel.add(Box.createVerticalGlue());
         buttonPanel.add(startButton);
+        buttonPanel.add(Box.createVerticalStrut(15));
         buttonPanel.add(cardListButton);
+        buttonPanel.add(Box.createVerticalStrut(15));
         buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createVerticalGlue());
+
         add(buttonPanel, BorderLayout.CENTER);
 
         // Aksi tombol

@@ -1,7 +1,6 @@
 package tcg.GUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 
 import tcg.Card;
@@ -13,7 +12,6 @@ public class CardListDialog extends JDialog {
         setSize(400, 400);
         setLocationRelativeTo(parent);
 
-        // Daftar kartu yang ingin ditampilkan
         java.util.List<Card> cards = Arrays.asList(
             new Infantry(),
             new LightTank(),
@@ -29,13 +27,12 @@ public class CardListDialog extends JDialog {
         for (Card card : cards) {
             StringBuilder detail = new StringBuilder();
             detail.append("<html><b>").append(card.name).append("</b><br>")
-                  .append("Cost: ").append(card.cost).append("<br>")
-                  .append("Type: ").append(card.type);
+                  .append("Cost / Biaya : ").append(card.cost).append("<br>")
+                  .append("Type : ").append(card.type);
 
-            // Tampilkan damage atau heal sesuai tipe kartu
             if (card instanceof Medic) {
                 try {
-                    java.lang.reflect.Field healField = card.getClass().getDeclaredField("heal");
+                    java.lang.reflect.Field healField = card.getClass().getDeclaredField("Heal");
                     healField.setAccessible(true);
                     detail.append("<br>Heal: ").append(healField.get(card));
                 } catch (Exception ignored) {}

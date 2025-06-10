@@ -2,9 +2,7 @@ package tcg.GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import tcg.*;
-import tcg.Cards.*;
 
 public class GameGUI extends JFrame {
     private Game game;
@@ -19,7 +17,7 @@ public class GameGUI extends JFrame {
         game.getPlayer().drawCards(3);
         game.getEnemy().drawCards(3);
 
-        setTitle("WW2 TCG - Game");
+        setTitle("WW2 TCG GAME");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -84,7 +82,7 @@ public class GameGUI extends JFrame {
     }
 
     private void updateStatusLabels() {
-        playerStatus.setText("Your HP: " + game.getPlayerHP() + " | Energy: " + game.getPlayerEnergy());
+        playerStatus.setText("Player HP: " + game.getPlayerHP() + " | Energy: " + game.getPlayerEnergy());
         enemyStatus.setText("Enemy HP: " + game.getEnemyHP() + " | Energy: " + game.getEnemyEnergy());
     }
 
@@ -94,11 +92,31 @@ public class GameGUI extends JFrame {
         for (int i = 0; i < game.getPlayerHand().size(); i++) {
             Card card = game.getPlayerHand().get(i);
             JButton cardButton = new JButton("<html><b>" + card.name + "</b><br/>Cost: " + card.cost + "<br/>Type: " + card.type + "</html>");
+            cardButton.setPreferredSize(new Dimension(130, 70));
+            cardButton.setBackground(new Color(154, 205, 50)); // OliveDrab lebih cerah
+            cardButton.setForeground(Color.BLACK);
+            cardButton.setFont(new Font("Arial", Font.BOLD, 14));
+            cardButton.setFocusPainted(false);
+            cardButton.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(85, 107, 47), 2, true), // OliveDrab tua
+                BorderFactory.createEmptyBorder(8, 8, 8, 8)
+            ));
+
             int index = i;
+
+            // Efek hover
+            cardButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    cardButton.setBackground(new Color(107, 142, 35)); // OliveDrab
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    cardButton.setBackground(new Color(154, 205, 50));
+                }
+            });
 
             cardButton.addActionListener(e -> {
                 if (card.cost > game.getPlayerEnergy()) {
-                    JOptionPane.showMessageDialog(this, "Not enough energy to play this card!");
+                    JOptionPane.showMessageDialog(this, "Kamu tidak punya cukup energi untuk kartu ini!");
                     return;
                 }
 
