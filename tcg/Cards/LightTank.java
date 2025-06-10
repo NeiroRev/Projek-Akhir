@@ -4,7 +4,7 @@ import tcg.Card;
 import tcg.Player;
 
 public class LightTank extends Card {
-    private int damage = 3; // contoh damage
+    private int damage = 3; 
 
     public LightTank() {
         super("Light Tank", 2, "Vehicle");

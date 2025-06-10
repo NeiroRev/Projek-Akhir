@@ -6,8 +6,8 @@ import java.util.*;
 import tcg.Card;
 import tcg.Cards.*;
 
-public class CardListDialog extends JDialog {
-    public CardListDialog(JFrame parent) {
+public class CardList extends JDialog {
+    public CardList(JFrame parent) {
         super(parent, "Daftar Kartu", true);
         setSize(400, 400);
         setLocationRelativeTo(parent);

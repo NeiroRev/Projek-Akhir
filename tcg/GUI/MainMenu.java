@@ -22,7 +22,6 @@ public class MainMenu extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(oliveDrab);
-        // Ubah layout menjadi BoxLayout agar tombol berada di tengah secara vertikal
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         JButton startButton = new JButton("Mulai Permainan");
@@ -36,7 +35,6 @@ public class MainMenu extends JFrame {
         exitButton.setBackground(oliveDrab.darker());
         exitButton.setForeground(Color.WHITE);
 
-        // Tambahkan tombol dengan jarak dan rata tengah
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         cardListButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -51,18 +49,17 @@ public class MainMenu extends JFrame {
 
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Aksi tombol
         startButton.addActionListener(e -> {
-            dispose(); // tutup menu utama
-            new GameGUI(); // buka GUI permainan
+            dispose(); 
+            new GameGUI(); 
         });
 
         cardListButton.addActionListener(e -> {
-            new CardListDialog(this); // tampilkan daftar kartu
+            new CardList(this); 
         });
-
+        
         exitButton.addActionListener(e -> System.exit(0));
-
+        
         setVisible(true);
     }
 

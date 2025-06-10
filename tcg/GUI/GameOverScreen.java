@@ -32,7 +32,7 @@ public class GameOverScreen extends JFrame {
 
         restartButton.addActionListener(e -> {
             dispose();
-            new MainMenu(); // Kembali ke menu utama, atau bisa langsung new GameGUI() jika ingin langsung main lagi
+            new MainMenu(); 
         });
 
         exitButton.addActionListener(e -> System.exit(0));

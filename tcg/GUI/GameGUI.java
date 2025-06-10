@@ -26,12 +26,10 @@ public class GameGUI extends JFrame {
         Color oliveDrab = new Color(107, 142, 35);
         getContentPane().setBackground(oliveDrab);
 
-        // Info HP & Energy
         playerStatus = new JLabel();
         enemyStatus = new JLabel();
         updateStatusLabels();
 
-        // Status panel
         JPanel statusPanel = new JPanel(new GridLayout(2, 1));
         statusPanel.setBackground(oliveDrab);
         playerStatus.setForeground(Color.WHITE);
@@ -40,20 +38,18 @@ public class GameGUI extends JFrame {
         statusPanel.add(enemyStatus);
         add(statusPanel, BorderLayout.NORTH);
 
-        // Panel kartu
         handPanel = new JPanel();
-        handPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Center, dengan jarak antar kartu
+        handPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); 
         handPanel.setBackground(oliveDrab);
         add(handPanel, BorderLayout.CENTER);
         refreshHand();
 
-        // Skip Turn button
         skipButton = new JButton("Skip Turn");
         skipButton.setBackground(oliveDrab.darker());
         skipButton.setForeground(Color.WHITE);
         skipButton.addActionListener(e -> {
             int beforeEnergy = game.getPlayerEnergy();
-            int beforeTurn = game.getTurnCount(); // Pastikan ada getter turnCount di Game.java
+            int beforeTurn = game.getTurnCount(); 
 
             enemyTurn();
             checkGameEnd();
@@ -63,7 +59,6 @@ public class GameGUI extends JFrame {
             int afterEnergy = game.getPlayerEnergy();
             int afterTurn = game.getTurnCount();
 
-            // Jika energy bertambah karena kelipatan 5 turn, tampilkan info
             if (afterTurn % 5 == 0 && afterEnergy > beforeEnergy) {
                 JOptionPane.showMessageDialog(this,
                     "Energy kamu bertambah 5!\nEnergy sekarang: " + afterEnergy,
@@ -71,8 +66,6 @@ public class GameGUI extends JFrame {
                 );
             }
         });
-
-        // Skip button panel
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(oliveDrab);
         bottomPanel.add(skipButton);
@@ -93,21 +86,20 @@ public class GameGUI extends JFrame {
             Card card = game.getPlayerHand().get(i);
             JButton cardButton = new JButton("<html><b>" + card.name + "</b><br/>Cost: " + card.cost + "<br/>Type: " + card.type + "</html>");
             cardButton.setPreferredSize(new Dimension(130, 70));
-            cardButton.setBackground(new Color(154, 205, 50)); // OliveDrab lebih cerah
+            cardButton.setBackground(new Color(154, 205, 50)); 
             cardButton.setForeground(Color.BLACK);
             cardButton.setFont(new Font("Arial", Font.BOLD, 14));
             cardButton.setFocusPainted(false);
             cardButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(85, 107, 47), 2, true), // OliveDrab tua
+                BorderFactory.createLineBorder(new Color(85, 107, 47), 2, true), 
                 BorderFactory.createEmptyBorder(8, 8, 8, 8)
             ));
 
             int index = i;
 
-            // Efek hover
             cardButton.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    cardButton.setBackground(new Color(107, 142, 35)); // OliveDrab
+                    cardButton.setBackground(new Color(107, 142, 35));
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     cardButton.setBackground(new Color(154, 205, 50));
@@ -129,7 +121,7 @@ public class GameGUI extends JFrame {
                 int afterPlayerHP = game.getPlayerHP();
 
                 int damage = beforeEnemyHP - afterEnemyHP;
-                if (damage < 0) damage = 0; // Untuk kartu heal atau support
+                if (damage < 0) damage = 0; 
 
                 JOptionPane.showMessageDialog(this,
                     "Kamu menyerang!\n" +
@@ -188,7 +180,7 @@ public class GameGUI extends JFrame {
         if (game.isGameOver()) {
             String winner = game.getWinner();
             new GameOverScreen(winner);
-            dispose(); // tutup window game
+            dispose(); 
         }
     }
 }

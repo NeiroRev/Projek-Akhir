@@ -46,17 +46,15 @@ public class Player {
     deck.clear();
     hand.clear();
 
-    // Tambahkan beragam kartu lebih banyak ke dalam deck
     for (int i = 0; i < 4; i++) {
         deck.add(new Infantry());      // 4 Infantry
         deck.add(new LightTank());     // 4 LightTank
         deck.add(new Paratrooper());   // 4 Paratrooper
         deck.add(new Medic());         // 4 Medic
-        deck.add(new MediumTank());    // 4 MediumTank (kalau kamu sudah punya ini)
-        deck.add(new Sniper());        // 4 Sniper (kalau kamu punya)
+        deck.add(new MediumTank());    // 4 MediumTank 
+        deck.add(new Sniper());        // 4 Sniper 
     }
 
-    // Total: 24 kartu
     Collections.shuffle(deck);
     }
 
@@ -69,7 +67,7 @@ public class Player {
     public void playCard(int index, Player opponent) {
         if (index < 0 || index >= hand.size()) return;
         Card card = hand.remove(index);
-        this.energy -= card.cost; // PENTING: energy dikurangi cost kartu
+        this.energy -= card.cost; 
         card.play(this, opponent);
     }
 
